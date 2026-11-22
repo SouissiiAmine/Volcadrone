@@ -38,11 +38,11 @@ export default function Showreel({ poster }: { poster: StaticImageData }) {
   };
 
   return (
-    <div className="relative aspect-[4/5] overflow-hidden bg-ink text-[#ece8de] sm:aspect-video">
-      <Image src={poster} alt="" fill placeholder="blur" sizes="100vw" className="object-cover" />
+    <div className="relative aspect-square overflow-hidden bg-ink text-[#ece8de] sm:aspect-video">
+      <Image src={poster} alt="" fill placeholder="blur" sizes="100vw" className="object-contain sm:object-cover" />
       <video ref={ref} muted loop playsInline preload="none"
         onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}
-        className="absolute inset-0 size-full object-cover"
+        className="absolute inset-0 size-full object-contain sm:object-cover"
         aria-label="Showreel Volcadrone : poursuite aérienne en drone FPV">
         <source src="/media/showreel.webm" type="video/webm" />
         <source src="/media/showreel.mp4" type="video/mp4" />
@@ -50,7 +50,7 @@ export default function Showreel({ poster }: { poster: StaticImageData }) {
       {/* Interface du viseur */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 p-4 sm:p-8">
         <div className="absolute inset-4 border border-white/25 sm:inset-8" />
-        <div className="absolute inset-x-[12%] inset-y-[12%] border border-dashed border-white/20" />
+        <div className="absolute inset-x-[12%] inset-y-[12%] hidden border border-dashed sm:block border-white/20" />
         <div className="absolute left-1/2 top-1/2 size-10 -translate-x-1/2 -translate-y-1/2">
           <span className="absolute left-1/2 top-0 h-full w-px bg-white/60" /><span className="absolute left-0 top-1/2 h-px w-full bg-white/60" />
         </div>
@@ -64,7 +64,7 @@ export default function Showreel({ poster }: { poster: StaticImageData }) {
         </div>
       </div>
       <button type="button" onClick={toggle} aria-label={playing ? "Mettre la vidéo en pause" : "Lire la vidéo"}
-        className="absolute bottom-16 left-1/2 grid size-14 -translate-x-1/2 place-items-center bg-brand text-ink transition-transform hover:scale-110 sm:bottom-20">
+        className="absolute bottom-6 left-1/2 grid size-12 -translate-x-1/2 place-items-center bg-brand text-ink transition-transform hover:scale-110 sm:bottom-20 sm:size-14">
         <svg viewBox="0 0 24 24" className="size-5" fill="currentColor" aria-hidden="true">
           {playing ? <path d="M7 5h4v14H7zM13 5h4v14h-4z" /> : <path d="M8 5v14l11-7z" />}
         </svg>
