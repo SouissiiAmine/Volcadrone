@@ -42,3 +42,8 @@ next-env.d.ts
 
 # exemple de configuration, sans secret
 !.env.example
+
+# Cloudflare
+.open-next
+.wrangler
+.dev.vars*
