@@ -1,9 +1,9 @@
 export const site = {
   name: "Volcadrone Auvergne",
   url: "https://volcadrone-auvergne.fr",
-  title: "Volcadrone Auvergne — Vidéo & photo par drone à Clermont-Ferrand",
+  title: "Volcadrone Auvergne — Vidéos drone FPV prêtes à poster, Clermont-Ferrand",
   description:
-    "Captation aérienne par drone et drone FPV cinématique, montage vidéo et contenus pour les réseaux sociaux. Basé à Clermont-Ferrand, interventions dans toute l'Auvergne-Rhône-Alpes. Devis gratuit.",
+    "Vidéos verticales prêtes à poster pour Instagram, TikTok, YouTube et Facebook : script, drone FPV intérieur et extérieur, images au sol, montage, voix off et sous-titres. Basé à Clermont-Ferrand, interventions dans toute l'Auvergne.",
   email: "volcadrone@gmail.com",
   // Renseignez le numéro (format international, ex. "+33612345678") pour
   // activer les boutons Appeler et WhatsApp. Vide = boutons masqués.
@@ -12,6 +12,9 @@ export const site = {
   region: "Auvergne-Rhône-Alpes",
   hours: "Lun–Ven 9h–18h · Sam 9h–12h",
   calendly: "https://calendly.com/volcadrone/30min",
+  // Showreel vertical (9:16) : déposez la vidéo dans public/media/ et
+  // renseignez son chemin, ex. "/media/reel.mp4". Vide = ancien showreel 16:9.
+  reel: "",
   socials: [
     { name: "Instagram", url: "https://www.instagram.com/volcadrone.auvergne/" },
     { name: "YouTube", url: "https://www.youtube.com/@VolcadroneAuvergne" },
@@ -49,51 +52,51 @@ export const nav = [
 
 export const services = [
   {
-    title: "Drone & vidéo événementielle",
-    target: "Mariages, événements privés ou publics",
-    text: "Captation aérienne et au sol pour raconter vos moments uniques : vidéos dynamiques et photos qui restituent l'émotion du jour J.",
-    icon: "M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7L12 3z",
+    title: "Vidéos prêtes à poster",
+    target: "Format 9:16 · Instagram, TikTok, YouTube, Facebook, LinkedIn",
+    text: "Script et scénario, tournage en drone FPV intérieur et extérieur, images au sol, puis montage dynamique avec voix off et sous-titres. Vous recevez des vidéos prêtes à publier.",
   },
   {
-    title: "Inspection & diagnostics aériens",
-    target: "Particuliers, entreprises, collectivités",
-    text: "Toitures, bâtiments et infrastructures inspectés rapidement et sans risque. Images détaillées pour repérer les anomalies et planifier les interventions.",
-    icon: "M3 11l9-7 9 7M5 10v9h14v-9M10 19v-5h4v5",
+    title: "Visite immobilière en FPV",
+    target: "Agences, propriétaires, hébergements",
+    text: "Le drone entre par la porte et traverse chaque pièce en un seul plan fluide, de la façade jusqu'au jardin. Une visite qui retient l'attention dès la première seconde.",
   },
   {
-    title: "Photographie & contenu visuel",
-    target: "Projets personnels, institutionnels, commerciaux",
-    text: "Photos et vidéos sur mesure pour valoriser vos biens, vos services ou vos initiatives, pensées pour toucher votre audience.",
-    icon: "M4 8h3l2-3h6l2 3h3v11H4V8zm8 2.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z",
+    title: "Entreprises locales",
+    target: "Commerces, artisans, restaurants, PME",
+    text: "Mettre en avant votre savoir-faire avec de la vraie vidéo : vos lieux, vos équipes, vos produits. Nous écrivons, tournons, montons et vous accompagnons sur la stratégie de diffusion.",
   },
   {
-    title: "Marketing & réseaux sociaux",
-    target: "Montage, publicité, stratégie visuelle",
-    text: "Montages et formats optimisés pour Instagram, TikTok, YouTube, LinkedIn et vos campagnes Meta Ads, avec un conseil personnalisé.",
-    icon: "M4 18V6m0 12h16M8 15v-4m4 4V8m4 7v-6",
+    title: "En supplément",
+    target: "Inspection, événementiel, photo aérienne",
+    text: "Inspection de toitures et de bâtiments, captation d'événements, photos aériennes HD : sur demande, en complément de vos vidéos.",
   },
 ];
 
 export const sectors = [
-  { key: "immobilier", title: "Immobilier & Construction", text: "Agences, promoteurs, architectes, suivi de chantier BTP" },
+  { key: "commerces", title: "Commerces & entreprises locales", text: "Boutiques, restaurants, artisans, créateurs, PME" },
+  { key: "immobilier", title: "Immobilier & Construction", text: "Visites FPV, agences, promoteurs, suivi de chantier" },
+  { key: "automobile", title: "Automobile & Transport", text: "Concessions, poursuites en FPV, spots publicitaires" },
   { key: "tourisme", title: "Tourisme & Loisirs", text: "Offices de tourisme, hôtels, campings, stations" },
-  { key: "automobile", title: "Automobile & Transport", text: "Concessions, spots publicitaires, logistique" },
   { key: "agriculture", title: "Agriculture & Environnement", text: "Exploitations, domaines viticoles, collectivités" },
   { key: "industrie", title: "Industrie & Énergie", text: "Parcs solaires et éoliens, usines, sites industriels" },
   { key: "institutions", title: "Institutions & Collectivités", text: "Mairies, patrimoine, écoles, associations" },
-  { key: "medias", title: "Communication & Médias", text: "Agences, producteurs audiovisuels, créateurs" },
   { key: "sport", title: "Sports & Événements", text: "Clubs, festivals, concerts, team building" },
   { key: "nautisme", title: "Marinas & Nautisme", text: "Ports de plaisance, clubs nautiques, bateaux" },
 ] as const;
 
 export const steps = [
-  { title: "Brief", text: "Échange gratuit sur vos objectifs, le lieu, les délais et le rendu attendu." },
-  { title: "Autorisations", text: "Repérage et démarches administratives de vol : nous nous en occupons." },
-  { title: "Tournage", text: "Plans aériens stabilisés et vol FPV immersif, complétés au sol si besoin." },
-  { title: "Livraison", text: "Montage, étalonnage et formats adaptés, livrés sous 24 h à 72 h selon le projet." },
+  { title: "Script", text: "Échange gratuit sur vos objectifs, puis script et scénario pensés pour votre audience et la plateforme visée." },
+  { title: "Tournage", text: "Drone FPV intérieur et extérieur, caméra au sol pour combiner les deux points de vue. Autorisations de vol gérées." },
+  { title: "Montage", text: "Montage dynamique sur DaVinci Resolve : rythme, étalonnage, voix off, sous-titres et musique." },
+  { title: "Publication", text: "Vidéos 9:16 prêtes à poster, livrées sous 24 h à 72 h, avec la stratégie pour faire décoller vos comptes." },
 ];
 
 export const faq = [
+  { q: "Quels formats livrez-vous ?", a: "Des vidéos verticales 9:16 prêtes à poster sur Instagram, TikTok, YouTube Shorts et Facebook, et sur demande en 16:9 ou 1:1." },
+  { q: "Faites-vous la voix off et les sous-titres ?", a: "Oui. Nous écrivons le script, enregistrons la voix off et ajoutons les sous-titres : vous n'avez rien à préparer." },
+  { q: "Gérez-vous aussi la stratégie sur les réseaux ?", a: "Oui. Nous vous conseillons sur les formats, le rythme de publication et les idées de contenus pour faire décoller vos comptes." },
+  { q: "Pouvez-vous filmer en intérieur ?", a: "Oui. Nos drones FPV compacts, assemblés par nos soins, passent les portes et traversent les pièces en toute sécurité : idéal pour l'immobilier et les commerces." },
   { q: "Quels sont vos délais de livraison ?", a: "Entre 24 h et 72 h selon la complexité du projet et la formule choisie." },
   { q: "Intervenez-vous en dehors de Clermont-Ferrand ?", a: "Oui : dans toute la région Auvergne-Rhône-Alpes, et partout en France sur demande." },
   { q: "Qui gère les autorisations de vol ?", a: "Nous prenons en charge toutes les démarches administratives nécessaires avant le tournage." },
@@ -101,9 +104,10 @@ export const faq = [
 ];
 
 export const projectTypes = [
-  ["corporate", "Vidéo d'entreprise"],
+  ["social", "Vidéo réseaux sociaux (9:16)"],
+  ["corporate", "Vidéo d'entreprise / commerce"],
   ["wedding", "Mariage / Événement"],
-  ["real-estate", "Immobilier"],
+  ["real-estate", "Visite immobilière FPV"],
   ["inspection", "Inspection / Diagnostic"],
   ["commercial", "Publicité / Réseaux sociaux"],
   ["other", "Autre"],
@@ -118,14 +122,17 @@ export const credentials = [
   { title: "Autorisations gérées", sub: "Préfecture, zones réglementées", ref: "" },
 ];
 
-// Matériel : à remplacer par les modèles exacts utilisés par Volcadrone.
+// Matériel : drones assemblés par Volcadrone. Pour afficher une vraie photo à
+// la place du dessin, déposez-la dans public/media/ et renseignez "photo".
 export const fleet = [
-  { kind: "quad", name: "Drone de prise de vue", role: "Plans aériens stabilisés",
-    specs: [["Image", "Vidéo 4K, photo haute définition"], ["Stabilisation", "Nacelle motorisée"], ["Pour", "Immobilier, tourisme, inspection"]] },
-  { kind: "fpv", name: "Drone FPV cinématique", role: "Vol immersif au plus près",
-    specs: [["Image", "Vidéo 4K"], ["Vol", "Pilotage en immersion, trajectoires libres"], ["Pour", "Événements, sport, publicité"]] },
-  { kind: "post", name: "Post-production", role: "Montage & étalonnage",
-    specs: [["Formats", "16:9, 9:16, 1:1"], ["Finition", "Étalonnage, son, sous-titres"], ["Délai", "24 h à 72 h"]] },
+  { kind: "whoop", name: "Cinewhoop intérieur", role: "Visites et lieux fermés", photo: "",
+    specs: [["Vol", "Passe les portes, traverse les pièces"], ["Sécurité", "Hélices protégées"], ["Pour", "Immobilier, commerces, restaurants"]] },
+  { kind: "fpv", name: "FPV de poursuite", role: "Vitesse et trajectoires libres", photo: "",
+    specs: [["Vol", "Suit voitures et personnes au plus près"], ["Image", "Vidéo 4K stabilisée"], ["Pour", "Automobile, sport, extérieurs"]] },
+  { kind: "ground", name: "Caméra au sol", role: "Le second point de vue", photo: "",
+    specs: [["Rôle", "Plans au sol combinés à l'aérien"], ["Stabilisation", "Nacelle motorisée"], ["Pour", "Portraits, produits, détails"]] },
+  { kind: "post", name: "Montage DaVinci", role: "Prêt à poster", photo: "",
+    specs: [["Formats", "9:16, et 16:9 ou 1:1 sur demande"], ["Finition", "Voix off, sous-titres, étalonnage"], ["Délai", "24 h à 72 h"]] },
 ] as const;
 
 // ⚠ Tarifs indicatifs à valider avec Volcadrone avant la mise en ligne :

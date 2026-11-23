@@ -15,7 +15,7 @@ export function LogoSymbol() {
 
 export function Logo({ className }: { className?: string }) {
   return (
-    <svg viewBox="126 24 1708 423" className={className} role="img" aria-label="Volcadrone Auvergne">
+    <svg viewBox="0 0 1708 423" className={className} role="img" aria-label="Volcadrone Auvergne">
       <use href="#logo" />
     </svg>
   );

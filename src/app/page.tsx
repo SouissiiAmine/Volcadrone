@@ -10,7 +10,6 @@ import { puys } from "../lib/geo";
 import { credentials, faq, fleet, pricing, sectors, services, site, steps } from "../lib/site";
 import agriculture from "../media/agriculture.webp";
 import automobile from "../media/automobile.webp";
-import evenement from "../media/evenement.webp";
 import immobilier from "../media/immobilier.webp";
 import industrie from "../media/industrie.webp";
 import inspection from "../media/inspection.webp";
@@ -22,9 +21,17 @@ import sport from "../media/sport.webp";
 import tourisme from "../media/tourisme.webp";
 
 const photos: Record<(typeof sectors)[number]["key"], StaticImageData> = {
-  immobilier, tourisme, automobile, agriculture, industrie, institutions, medias, sport, nautisme,
+  commerces: medias, immobilier, tourisme, automobile, agriculture, industrie, institutions, sport, nautisme,
 };
-const servicePhotos = [evenement, inspection, immobilier, medias];
+const servicePhotos = [medias, immobilier, automobile, inspection];
+
+const included = [
+  ["Script & scénario", "Écrits pour votre audience et la plateforme visée"],
+  ["Tournage aérien et au sol", "Drone FPV intérieur et extérieur, caméra au sol"],
+  ["Montage dynamique", "Sur DaVinci Resolve, étalonnage et musique"],
+  ["Voix off & sous-titres", "Une vidéo qui se comprend même sans le son"],
+  ["Stratégie de diffusion", "Formats, rythme et idées pour faire décoller vos comptes"],
+];
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -108,19 +115,28 @@ function Drawing({ kind }: { kind: (typeof fleet)[number]["kind"] }) {
         <svg viewBox="0 0 100 100" className={layer}><circle cx="70" cy="30" r="5" {...s} /></svg>
       </div>
     );
-  const fpv = kind === "fpv";
+  if (kind === "ground")
+    return (
+      <div className="explode relative mx-auto size-56">
+        <svg viewBox="0 0 100 100" className={layer}><rect x="10" y="10" width="80" height="80" {...s} strokeDasharray="2 3" /></svg>
+        <svg viewBox="0 0 100 100" className={layer}><path d="M46 88V56h8v32M38 88h24" {...s} strokeWidth={2} /></svg>
+        <svg viewBox="0 0 100 100" className={layer}><path d="M30 56V30h40v26M30 30l-6 6M70 30l6 6" {...s} /></svg>
+        <svg viewBox="0 0 100 100" className={layer}><rect x="38" y="34" width="24" height="16" {...s} /><circle cx="50" cy="42" r="5" {...s} stroke="#5ceb0f" /></svg>
+      </div>
+    );
+  const whoop = kind === "whoop";
   return (
     <div className="explode relative mx-auto size-56">
       <svg viewBox="0 0 100 100" className={layer}><rect x="10" y="10" width="80" height="80" {...s} strokeDasharray="2 3" /></svg>
       <svg viewBox="0 0 100 100" className={layer}>
-        <path d={fpv ? "M28 28L72 72M72 28L28 72" : "M30 30l14 14M70 30L56 44M30 70l14-14M70 70L56 56"} {...s} strokeWidth={2} />
-        <rect x={fpv ? 40 : 40} y="40" width="20" height="20" {...s} />
+        <path d="M28 28L72 72M72 28L28 72" {...s} strokeWidth={2} />
+        <rect x="40" y="40" width="20" height="20" {...s} />
       </svg>
       <svg viewBox="0 0 100 100" className={layer}>
-        {[[28, 28], [72, 28], [28, 72], [72, 72]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r={fpv ? 11 : 15} {...s} strokeDasharray="1 2" />)}
+        {[[28, 28], [72, 28], [28, 72], [72, 72]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r={whoop ? 14 : 11} {...s} strokeDasharray={whoop ? undefined : "1 2"} strokeWidth={whoop ? 2 : 1.2} />)}
       </svg>
       <svg viewBox="0 0 100 100" className={layer}>
-        {fpv ? <path d="M44 36h12v-6H44z" {...s} stroke="#5ceb0f" /> : <><circle cx="50" cy="66" r="5" {...s} stroke="#5ceb0f" /><path d="M50 60v-8" {...s} stroke="#5ceb0f" /></>}
+        <path d="M44 36h12v-6H44z" {...s} stroke="#5ceb0f" />
       </svg>
     </div>
   );
@@ -158,13 +174,13 @@ export default function Home() {
 
             <div className="hero-copy grid gap-8 lg:grid-cols-[1fr_22rem] lg:items-end">
               <div>
-                <p className="mono fade-in mb-6 hidden text-accent sm:block" style={{ "--d": "0.1s" } as React.CSSProperties}>Captation aérienne par drone · {site.city}</p>
+                <p className="mono fade-in mb-6 hidden text-accent sm:block" style={{ "--d": "0.1s" } as React.CSSProperties}>Vidéos drone FPV prêtes à poster · {site.city}</p>
                 <h1 className="display line-in text-[clamp(3.4rem,min(12.5vw,15.5svh),13rem)]">
-                  <span><span style={{ "--i": 0 } as React.CSSProperties}>Vos projets</span></span>
-                  <span><span style={{ "--i": 1 } as React.CSSProperties}>prennent</span></span>
+                  <span><span style={{ "--i": 0 } as React.CSSProperties}>Vos vidéos</span></span>
+                  <span><span style={{ "--i": 1 } as React.CSSProperties}>prêtes</span></span>
                   <span>
                     <span style={{ "--i": 2 } as React.CSSProperties} className="relative">
-                      <span className="serif text-[0.9em] lowercase">de l&apos;altitude.</span>
+                      <span className="serif text-[0.9em] lowercase">à poster.</span>
                       <svg className="scribble absolute -inset-x-[4%] -bottom-[6%] h-[30%] w-[108%] text-brand" viewBox="0 0 300 30" preserveAspectRatio="none" fill="none" aria-hidden="true">
                         <path pathLength={1} d="M4 22C60 8 140 6 296 14M20 27c80-8 170-10 260-6" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
                       </svg>
@@ -173,7 +189,7 @@ export default function Home() {
                 </h1>
               </div>
               <div className="fade-in pointer-events-auto" style={{ "--d": "0.7s" } as React.CSSProperties}>
-                <p className="hidden text-lg leading-relaxed sm:block">Prises de vues aériennes et vol FPV cinématique, du tournage au montage final, pour montrer votre projet dans son territoire.</p>
+                <p className="hidden text-lg leading-relaxed sm:block">Script, drone FPV intérieur et extérieur, images au sol, montage, voix off et sous-titres : des vidéos 9:16 prêtes à publier sur Instagram, TikTok, YouTube et Facebook.</p>
                 <div className="grid gap-2 sm:mt-6">
                   <Link href="/#contact" className="btn btn-solid">Demander un devis gratuit <Arrow /></Link>
                   <Link href="/#showreel" className="btn hidden bg-bg sm:flex">Voir le showreel <Arrow /></Link>
@@ -204,7 +220,7 @@ export default function Home() {
 
       {/* ---------- 01 Services ---------- */}
       <section id="services" className="wrap py-24 sm:py-36">
-        <Sec n="01" label="Services" title="Quatre métiers," accent="un pilote." text="De la prise de vue à la publication : captation, montage et formats adaptés à chaque canal." />
+        <Sec n="01" label="Services" title="Vous n'avez" accent="rien à faire." text="Mettre en avant les entreprises locales avec de la vraie vidéo. Script, tournage, montage, voix off, sous-titres et stratégie : nous nous occupons de tout, vous publiez." />
         <ol className="border-b border-line2">
           {services.map((s, i) => (
             <li key={s.title} data-follow className="svc relative grid gap-3 border-t border-line2 py-8 sm:grid-cols-[5rem_1.3fr_1fr] sm:gap-8 sm:py-10">
@@ -225,9 +241,24 @@ export default function Home() {
       {/* ---------- 02 Showreel ---------- */}
       <section id="showreel" className="py-24 sm:py-36">
         <div className="wrap">
-          <Sec n="02" label="Showreel" title="Dans le" accent="viseur." text="Le drone FPV suit l'action au plus près : des trajectoires impossibles à obtenir autrement." />
+          <Sec n="02" label="Showreel" title="Format" accent="vertical." text="Pensées pour le pouce : des vidéos 9:16 qui captent l'attention dès la première seconde, du drone FPV aux plans au sol." />
+          <div className="grid items-center gap-12 lg:grid-cols-[24rem_1fr] lg:gap-20">
+            <div className="crop mx-auto w-full max-w-[22rem] p-3 lg:max-w-none"><Marks /><Showreel src={site.reel || undefined} poster={poster} /></div>
+            <div>
+              <p className="mono text-accent">Inclus dans chaque vidéo</p>
+              <ul className="mt-6 border-b border-line2">
+                {included.map(([k, v], i) => (
+                  <li key={k} className="reveal grid grid-cols-[3rem_1fr] gap-4 border-t border-line2 py-5">
+                    <span className="mono text-accent">0{i + 1}</span>
+                    <div><p className="text-xl font-semibold sm:text-2xl">{k}</p><p className="mt-1 text-mute">{v}</p></div>
+                  </li>
+                ))}
+              </ul>
+              <p className="mono mt-6 text-mute">Instagram · TikTok · YouTube Shorts · Facebook · LinkedIn</p>
+              <Link href="/#contact" className="btn btn-solid mt-8 sm:w-max">Je veux ma vidéo <Arrow /></Link>
+            </div>
+          </div>
         </div>
-        <div className="wrap"><div className="crop"><Marks /><Showreel poster={poster} /></div></div>
       </section>
 
       {/* ---------- 03 Étalonnage ---------- */}
@@ -240,7 +271,7 @@ export default function Home() {
       {/* ---------- 04 Secteurs : planche contact ---------- */}
       <section id="secteurs" className="sheet py-24 sm:py-36">
         <div className="wrap [--line2:rgb(236_232_222/0.32)] [--mute:#9c9588] [--accent:#5ceb0f]">
-          <Sec n="04" label="Secteurs" title="Planche" accent="contact." text={<>De l&apos;immobilier au nautisme, chaque métier a son angle. <span className="hover-only">Survolez une image</span><span className="touch-only">Faites défiler les images</span> pour les entourer au crayon gras.</>} />
+          <Sec n="04" label="Secteurs" title="Planche" accent="contact." text={<>Du commerce de quartier au nautisme, chaque métier a son angle. <span className="hover-only">Survolez une image</span><span className="touch-only">Faites défiler les images</span> pour les entourer au crayon gras.</>} />
         </div>
         <div className="sprockets" aria-hidden="true" />
         <ul className="snapx wrap flex snap-x snap-mandatory gap-3 overflow-x-auto py-3 md:grid md:grid-cols-3 md:overflow-visible">
@@ -275,7 +306,7 @@ export default function Home() {
       {/* ---------- 06 Méthode : journal de vol ---------- */}
       <section id="methode" className="border-y border-line bg-bg2 py-24 sm:py-36">
         <div className="wrap">
-          <Sec n="06" label="Méthode" title="Plan de" accent="vol." />
+          <Sec n="06" label="Méthode" title="Plan de" accent="vol." text="De l'idée à la publication, une seule personne vous accompagne : pas d'intermédiaire, pas de surprise." />
           <div className="relative">
             <svg className="absolute inset-x-0 top-6 hidden h-24 w-full md:block" viewBox="0 0 1000 100" preserveAspectRatio="none" fill="none" aria-hidden="true">
               <path className="wp-line" pathLength={1} d="M10 50C150 0 250 100 340 50S560 0 670 50 880 100 990 50" stroke="#5ceb0f" strokeWidth="2" strokeDasharray="1" vectorEffect="non-scaling-stroke" />
@@ -295,12 +326,14 @@ export default function Home() {
 
       {/* ---------- 07 Matériel ---------- */}
       <section id="materiel" className="wrap py-24 sm:py-36">
-        <Sec n="07" label="Matériel" title="Vue" accent="éclatée." text={<><span className="hover-only">Survolez un équipement</span><span className="touch-only">Faites glisser les équipements</span> pour les démonter. Le bon outil pour chaque plan, du survol stabilisé à l&apos;immersion FPV.</>} />
-        <ul className="snapx -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-3 md:gap-0 md:overflow-visible md:border-l md:border-t md:border-line2 md:px-0 md:pb-0">
+        <Sec n="07" label="Matériel" title="Vue" accent="éclatée." text={<><span className="hover-only">Survolez un équipement</span><span className="touch-only">Faites glisser les équipements</span> pour les démonter. Des drones assemblés par nos soins, pas des kits du commerce : chaque machine est adaptée au tournage, de la visite d&apos;intérieur à la poursuite de voiture.</>} />
+        <ul className="snapx -mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sm:-mx-8 sm:px-8 md:mx-0 md:grid md:grid-cols-2 md:gap-0 xl:grid-cols-4 md:overflow-visible md:border-l md:border-t md:border-line2 md:px-0 md:pb-0">
           {fleet.map((f, i) => (
             <li key={f.name} tabIndex={0} className="kit w-[86%] shrink-0 snap-center border border-line2 p-6 outline-none sm:w-[60%] sm:p-8 md:w-auto md:border-l-0 md:border-t-0">
               <div className="mono flex justify-between text-mute"><span>Fig. {i + 1}</span><span>{f.role}</span></div>
-              <div className="py-10 [perspective:900px]"><Drawing kind={f.kind} /></div>
+              {f.photo
+                ? <div className="relative my-6 aspect-square overflow-hidden"><Image src={f.photo} alt={f.name} fill sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 86vw" className="object-cover" /></div>
+                : <div className="py-10 [perspective:900px]"><Drawing kind={f.kind} /></div>}
               <h3 className="display text-4xl">{f.name}</h3>
               <dl className="mt-5 grid gap-2 border-t border-line pt-4 text-sm">
                 {f.specs.map(([k, v]) => (
